@@ -131,7 +131,11 @@ func main() {
 		fmt.Println(str)
 	} else if *argDec {
 		decryptingData, _ := base64.StdEncoding.DecodeString(stdInValue)
-		data, _ := decryption(decryptingData, keyName)
+		data, err := decryption(decryptingData, keyName)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 		if *argBatch {
 			str = data
 		} else {
